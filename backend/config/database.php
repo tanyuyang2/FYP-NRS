@@ -1,34 +1,19 @@
 <?php
 mysqli_report(MYSQLI_REPORT_OFF);
-/*
-$host = getenv("MYSQLHOST");
-$port = getenv("MYSQLPORT");
-$user = getenv("MYSQLUSER");
-$password = getenv("MYSQLPASSWORD");
-$database = getenv("MYSQLDATABASE");
 
-$conn = new mysqli(
-    $host,
-    $user,
-    $password,
-    $database,
-    $port
-);
-
-if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
-}
-*/
+require_once __DIR__ . "/env.php";
 
 /*
- * Local database connection
+ * Defaults are the local XAMPP values, so development is unchanged.
+ * On the server these come from /etc/nrs/nrs.ini, which lives outside
+ * the web root.
  */
 
-$host = "localhost";
-$port = 3306;
-$user = "root";
-$password = "";
-$database = "nrs";
+$host     = nrs_env("DB_HOST", "localhost");
+$port     = (int) nrs_env("DB_PORT", "3306");
+$user     = nrs_env("DB_USER", "root");
+$password = nrs_env("DB_PASSWORD", "");
+$database = nrs_env("DB_NAME", "nrs");
 
 $conn = new mysqli(
     $host,

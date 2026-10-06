@@ -1,0 +1,9 @@
+* text=auto
+
+# These are executed by Linux shells / Apache / MariaDB. CRLF breaks them
+# ("\r: command not found"), so keep LF regardless of the checkout platform.
+*.sh        text eol=lf
+*.conf      text eol=lf
+*.ini       text eol=lf
+*.sql       text eol=lf
+*.php       text eol=lf

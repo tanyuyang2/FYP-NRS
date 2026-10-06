@@ -116,7 +116,10 @@ if (!$stmt->execute()) {
 
 $stmt->close();
 
-$resetUrl = "http://localhost:5173/reset-password?token=" . $token;
+// From config, not the Host header: a forged Host would put an attacker's
+// domain in the emailed link and leak the token.
+$appUrl = rtrim(nrs_env("APP_URL", "http://localhost:5173"), "/");
+$resetUrl = $appUrl . "/reset-password?token=" . $token;
 
 try {
     $resend = Resend::client($resendApiKey);
