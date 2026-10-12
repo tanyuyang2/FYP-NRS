@@ -21,8 +21,6 @@ export default function Sidebar() {
 	useEffect(() => {
 		const loadTrendingNews = async () => {
 			try {
-				await api.post("/article/calculateTrendingScore.php");
-
 				const response = await api.get("/article/listTrending.php");
 				setTrendingNews(response.data.articles);
 			} catch (error) {
