@@ -4,7 +4,10 @@ Offline research scripts for ranking articles by **bridging**: an article
 scores well when it's rated helpful by people who usually disagree with
 each other, not just by many people. The design follows Community Notes
 (Birdwatch). These scripts are the reference the production version gets
-checked against.
+checked against: `backend/cron/bridgingScore.php` ports `combined.py` and
+feeds the author trust score. Run it with an export to compare:
+`php backend/cron/bridgingScore.php bridging/data/ratings.tsv`. It leaves
+articles with a single rating unscored, where `combined.py` prints 0.
 
 ## Running
 
@@ -26,6 +29,7 @@ python combined.py      # main model: user positions, similarities, article rank
 | `sides.py` | Which articles define the axis, and how each side voted on them |
 | `tilt.py` | Whether the ranking favours either side, compared with plain helpful % |
 | `stability.py` | User positions from each of the 10 fits, to spot users the data can't place |
+| `sybil.py` | Whether fake accounts can lift one author's articles and trust score: naive likers vs accounts that copy real users' votes to look independent |
 
 ## Conventions
 
@@ -34,5 +38,9 @@ python combined.py      # main model: user positions, similarities, article rank
   similarity but kept in the article ranking.
 - The axis has no inherent direction, so the user in `data.ANCHOR` (YY) is
   pinned to the negative end to keep runs comparable.
+- Authors' ratings of their own articles are dropped at export (and in
+  production), except on the control posts. They aren't independent
+  judgements, and from an author far out on the axis they read as
+  cross-side agreement.
 - Users are matched by `user_id`. Display names come from `data/users.tsv`,
   so account renames are picked up automatically.

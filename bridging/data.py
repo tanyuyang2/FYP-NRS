@@ -25,3 +25,8 @@ def names():
 
 def titles():
     return {int(a): t for a, t in _tsv("titles.tsv")}
+
+
+def authors():
+    """article_id -> author_id, for published articles."""
+    return {int(a): int(u) for a, u in _tsv("authors.tsv")}

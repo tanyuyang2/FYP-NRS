@@ -85,6 +85,11 @@
     background: #ffe5e5;
 }
 
+.my-profile .trust-score.none {
+    color: #666;
+    background: #f0f0f0;
+}
+
 .my-profile .profile-bio {
     margin: 0;
 	color: #666;

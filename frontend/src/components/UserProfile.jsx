@@ -27,9 +27,11 @@ export default function UserProfile() {
 		publishedPage * articlesPerPage
 	);
 
-	const trustScore = 80;
+	// null until the author has enough rated articles (see getUser.php)
+	const trustScore = profileUser?.trust_score ?? null;
 	const trustScoreClass =
-		trustScore >= 80 ? "high"
+		trustScore === null ? "none"
+		: trustScore >= 80 ? "high"
 		: trustScore >= 50 ? "medium"
 		: "low";
 
@@ -139,8 +141,11 @@ export default function UserProfile() {
 						<div className="profile-name-row">
 							<div>
 								<h1>{profileUser.username}</h1>
-								<div className={`trust-score ${trustScoreClass}`}>
-									Trust Score: {trustScore}
+								<div
+									className={`trust-score ${trustScoreClass}`}
+									title="How helpful this author's articles are to readers who usually disagree with each other"
+								>
+									Trust Score: {trustScore ?? "Not enough ratings"}
 								</div>
 							</div>
 							<button
