@@ -9,6 +9,13 @@ import Pagination from "./Pagination";
 import Loading from "./Loading";
 import "./NewsList.css"
 
+// The sort button cycles through these in order.
+const sortOptions = [
+	{ value: "latest", label: "Latest" },
+	{ value: "trending", label: "Trending" },
+	{ value: "helpful", label: "Most helpful" }
+];
+
 export default function NewsList() {
 	const [articles, setArticles] = useState([]);
 	const navigate = useNavigate();
@@ -84,9 +91,10 @@ export default function NewsList() {
 	};
 
 	const handleSortToggle = () => {
-		setSortBy((previousSort) =>
-			previousSort === "latest" ? "trending" : "latest"
-		);
+		setSortBy((previousSort) => {
+			const index = sortOptions.findIndex((option) => option.value === previousSort);
+			return sortOptions[(index + 1) % sortOptions.length].value;
+		});
 
 		setPage(1);
 	};
@@ -155,7 +163,7 @@ export default function NewsList() {
 					>
 						<ListSortDescending size={18} />
 						<span>
-							Sort by: {sortBy === "latest" ? "Latest" : "Trending"}
+							Sort by: {sortOptions.find((option) => option.value === sortBy).label}
 						</span>
 					</button>
 				</div>

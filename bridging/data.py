@@ -30,3 +30,19 @@ def titles():
 def authors():
     """article_id -> author_id, for published articles."""
     return {int(a): int(u) for a, u in _tsv("authors.tsv")}
+
+
+def comment_ratings():
+    """(user_id, comment_id, reaction) rows; 1 = like, 0 = dislike. Self-reactions excluded."""
+    with open(DATA / "comment_ratings.tsv", encoding="utf-8") as fh:
+        return [tuple(map(int, l.split())) for l in fh if l.strip()]
+
+
+def comments():
+    """comment_id -> dict(article, user, parent, status, created, text); parent 0 = top level."""
+    out = {}
+    for row in _tsv("comments.tsv"):
+        c, a, u, parent, status, created = row[:6]
+        out[int(c)] = {"article": int(a), "user": int(u), "parent": int(parent), "status": int(status),
+                       "created": created, "text": row[6] if len(row) > 6 else ""}
+    return out

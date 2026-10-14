@@ -20,7 +20,7 @@ if ($tab !== "news" && $tab !== "for-you") {
 	$categoryId = (int) $tab;
 }
 
-if ($sort !== "latest" && $sort !== "trending") {
+if (!in_array($sort, ["latest", "trending", "helpful"], true)) {
 	http_response_code(400);
 	echo json_encode([
 		"success" => false,
@@ -43,8 +43,12 @@ $offset = ($page - 1) * $limit;
 
 if ($sort === "latest") {
 	$orderBy = "a.published_at DESC";
-} else {
+} elseif ($sort === "trending") {
 	$orderBy = "a.trending_score DESC, a.published_at DESC";
+} else {
+	// Bridging score from the nrs-bridging timer. Articles with fewer than two
+	// ratings have none yet and go last, newest first.
+	$orderBy = "a.bridging_score IS NULL, a.bridging_score DESC, a.published_at DESC";
 }
 
 if ($categoryId !== null) {
