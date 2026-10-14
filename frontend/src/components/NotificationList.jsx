@@ -98,7 +98,6 @@ export default function NotificationList() {
 	return (
 		<div className="notification-page">
 			<h1>Notifications</h1>
-			
 
 			<div className="notification-content">
 				{notifications.length === 0 ? (

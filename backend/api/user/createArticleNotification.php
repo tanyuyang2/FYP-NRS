@@ -1,17 +1,7 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in",
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $actorId = $_SESSION["user_id"];	
 session_write_close();
@@ -62,8 +52,9 @@ if (!$stmt->execute()) {
     exit;
 }
 
-$article = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
 $stmt->close();
+$article = $result->fetch_assoc();
 
 if (!$article) {
     http_response_code(403);
@@ -95,15 +86,15 @@ if ($type == 1) {
             message,
             created_at
         )
-        SELECT
+         SELECT
             subscriber_id,
             ?,
             ?,
             ?,
             ?,
             ?
-        FROM user_subscription
-        WHERE subscribed_to_id = ?"
+         FROM user_subscription
+         WHERE subscribed_to_id = ?"
     );
 } else {
 	$stmt = $conn->prepare(

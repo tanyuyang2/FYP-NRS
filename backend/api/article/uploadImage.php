@@ -1,5 +1,7 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
+require __DIR__ . "/../../config/database.php";
+require __DIR__ . "/../utils/requireUser.php";
 require __DIR__ . "/../../config/cloudinary.php";
 
 if (!isset($_FILES["upload"])) {

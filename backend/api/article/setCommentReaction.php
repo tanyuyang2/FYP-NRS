@@ -1,20 +1,9 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in"
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
-
 $commentId = $data["comment_id"] ?? null;
 $reaction = $data["reaction"] ?? null;
 $userId = $_SESSION["user_id"];

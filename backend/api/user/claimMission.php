@@ -1,18 +1,8 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-require_once __DIR__ . "/../utils/missionProgress.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in"
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
+require __DIR__ . "/../utils/missionProgress.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 $code = is_array($data) ? ($data["mission_code"] ?? null) : null;

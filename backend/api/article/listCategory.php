@@ -3,9 +3,7 @@ require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
 
 $stmt = $conn->prepare(
-    "SELECT
-        category_id,
-        category_name
+    "SELECT category_id, category_name
      FROM category
      ORDER BY category_id ASC"
 );

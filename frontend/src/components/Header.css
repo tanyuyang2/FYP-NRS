@@ -16,11 +16,9 @@
 	background: #6f4bc3;
 	color: white;
 	border-radius: 8px;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	font-size: 24px;
 	font-weight: bold;
 }
@@ -60,7 +58,6 @@
 	top: calc(100% + 2px);
 	z-index: 200;
 	width: 100%;
-	box-sizing: border-box;
 	max-height: 400px;
 	overflow-y: auto;
 	border: 1px solid #ddd;

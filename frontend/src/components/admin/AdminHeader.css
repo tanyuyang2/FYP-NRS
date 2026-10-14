@@ -1,0 +1,50 @@
+.admin-header {
+	height: 120px;
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 0 32px;
+	border-bottom: 1px solid #ddd;
+	background: white;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.admin-header .logo {
+	width: 40px;
+	height: 40px;
+	background: #6f4bc3;
+	color: white;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.admin-header h1 {
+	margin: 0;
+	font-size: 24px;
+}
+
+.admin-header .header-profile {
+	position: relative;
+	margin-left: auto;
+}
+
+.admin-header .profile-avatar {
+	display: flex;
+	padding: 0;
+	border: none;
+	background: none;
+}
+
+.admin-header .profile-picture {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid black;
+}

@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useModal } from "../context/ModalContext";
-import { House, UserRoundPen, Bell, Bookmark, NotebookPen, ListChecks } from "lucide-react";
+import { House, UserRoundPen, Bell, Bookmark, NotebookPen, ListChecks, ShieldUser } from "lucide-react";
 import "./NavBar.css";
 
 export default function NavBar() {
-	const { isLoggedIn } = useAuth();
+	const { user, isLoggedIn } = useAuth();
     const { openLogin } = useModal();
 
 	const handleLoginClick = (e) => {
@@ -17,6 +17,13 @@ export default function NavBar() {
 
 	return (
 		<nav className="navbar">
+			{user?.role_id == 2 && (
+				<NavLink to="/admin" className="navbar-item">
+					<ShieldUser size={30} />
+					<span>Admin</span>
+				</NavLink>
+			)}
+			
 			<NavLink to="/" className="navbar-item">
 				<House size={30} />
 				<span>Home</span>

@@ -6,8 +6,19 @@ session_start();
 
 $data = json_decode(file_get_contents("php://input"), true);
 $username = $data["username"] ?? "";
-$email = strtolower(trim($data["email"] ?? ""));
+$email = $data["email"] ?? "";
 $password = $data["password"] ?? "";
+
+if (!is_string($username) || !is_string($email) || !is_string($password)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid registration details"
+	]);
+	exit;
+}
+
+$email = strtolower(trim($email));
 
 if (($_SESSION["verified_registration_email"] ?? null) !== $email) {
     http_response_code(400);

@@ -129,11 +129,10 @@
 	border: none;
 	background: none;
 	color: #6f4bc3;
-	font: inherit;
+	font-size: 16px;
 }
 
 .login-modal-overlay .login-modal-footer .register-message {
 	font-size: 14px;
 	color: #777;
 }
-

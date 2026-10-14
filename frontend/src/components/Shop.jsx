@@ -9,7 +9,7 @@ import "./Shop.css";
 
 export default function Shop() {
     const navigate = useNavigate();
-    const { user, isLoggedIn, isLoading, refreshUser } = useAuth();
+    const { user, isLoggedIn, isLoading, refreshUser, showCoinReward } = useAuth();
 	const { showNotification } = useNotification();
 	const [buying, setBuying] = useState(null);
     const [cosmetics, setCosmetics] = useState([]);
@@ -58,6 +58,8 @@ export default function Shop() {
 			const response = await api.post("/user/buyComestic.php", {
 				cosmetic_id: cosmeticId
 			});
+
+			showCoinReward(response.data.amount);
 
 			setCosmetics(prev =>
 				prev.map(cosmetic =>

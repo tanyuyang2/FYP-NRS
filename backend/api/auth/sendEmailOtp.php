@@ -7,7 +7,18 @@ require __DIR__ . "/../../vendor/autoload.php";
 session_start();
 
 $data = json_decode(file_get_contents("php://input"), true);
-$email = strtolower(trim($data["email"] ?? ""));
+$email = $data["email"] ?? "";
+
+if (!is_string($email)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid email"
+	]);
+	exit;
+}
+
+$email = strtolower(trim($email));
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);

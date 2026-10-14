@@ -2,23 +2,13 @@
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
 require __DIR__ . "/../../config/sanitize.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in",
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$title = trim($data["title"] ?? "");
-$content = sanitizeHtml($data["content"] ?? "");
-$summary = trim($data["summary"] ?? "");
+$title = $data["title"] ?? "";
+$content = $data["content"] ?? "";
+$summary = $data["summary"] ?? "";
 $thumbnail = $data["thumbnail"] ?? null;
 $status = $data["status"] ?? null;
 $categoryId = $data["category_id"] ?? null;
@@ -26,6 +16,28 @@ $publishedAt = $data["published_at"] ?? null;
 $tagIds = $data["tag_ids"] ?? [];
 $backgroundId = $data["background_cosmetic_id"] ?? null;
 $userId = $_SESSION["user_id"];
+
+if (!is_string($title) || !is_string($content) || !is_string($summary)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid article content"
+	]);
+	exit;
+}
+
+$title = trim($title);
+$content = sanitizeHtml($content);
+$summary = trim($summary);
+
+if (($thumbnail !== null && !is_string($thumbnail)) || ($publishedAt !== null && !is_string($publishedAt))) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid thumbnail or publish date"
+	]);
+	exit;
+}
 
 if ($title === "" || $content === "" || $status === null) {
     http_response_code(400);

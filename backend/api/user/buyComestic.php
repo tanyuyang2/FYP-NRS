@@ -1,17 +1,7 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in"
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 $cosmeticId = $data["cosmetic_id"] ?? null;
@@ -55,8 +45,9 @@ if (!$stmt->execute()) {
     exit;
 }
 
-$cosmetic = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
 $stmt->close();
+$cosmetic = $result->fetch_assoc();
 
 if (!$cosmetic) {
     $conn->rollback();
@@ -86,7 +77,7 @@ $stmt->bind_param("ii", $userId, $cosmeticId);
 
 if (!$stmt->execute()) {
     $conn->rollback();
-    if (($stmt->errno === 1062)) {
+    if ($stmt->errno === 1062) {
         http_response_code(409);
         echo json_encode([
             "success" => false,
@@ -177,5 +168,6 @@ if (!$conn->commit()) {
 
 echo json_encode([
     "success" => true,
+	"amount" => $amount,
     "message" => "Cosmetic purchased successfully"
 ]);

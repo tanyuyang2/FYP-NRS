@@ -1,23 +1,24 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in"
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 $userId = $_SESSION["user_id"];
-$email = strtolower(trim($data["email"] ?? ""));
+$email = $data["email"] ?? "";
 $currentPassword = $data["current_password"] ?? "";
 $newPassword = $data["new_password"] ?? "";
+
+if (!is_string($email) || !is_string($currentPassword) || !is_string($newPassword)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid account details"
+	]);
+	exit;
+}
+
+$email = strtolower(trim($email));
 
 if ($email === "" || $currentPassword === "") {
     http_response_code(400);

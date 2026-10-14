@@ -5,8 +5,19 @@ require __DIR__ . "/../../config/database.php";
 session_start();
 
 $data = json_decode(file_get_contents("php://input"), true);
-$email = strtolower(trim($data["email"] ?? ""));
+$email = $data["email"] ?? "";
 $otp = $data["otp"] ?? "";
+
+if (!is_string($email) || !is_string($otp)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid email or verification code"
+	]);
+	exit;
+}
+
+$email = strtolower(trim($email));
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);

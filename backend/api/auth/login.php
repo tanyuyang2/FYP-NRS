@@ -4,8 +4,19 @@ require __DIR__ . "/../../config/database.php";
 session_start();
 
 $data = json_decode(file_get_contents("php://input"), true);
-$email = strtolower(trim($data["email"] ?? ""));
+$email = $data["email"] ?? "";
 $password = $data["password"] ?? "";
+
+if (!is_string($email) || !is_string($password)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid login details"
+	]);
+	exit;
+}
+
+$email = strtolower(trim($email));
 
 $stmt = $conn->prepare(
     "SELECT
@@ -53,13 +64,13 @@ if (!$user || !password_verify($password, $user["password"])) {
 
 	echo json_encode([
 		"success" => false,
-		"message" => "Invalid username or password"
+		"message" => "Invalid email or password"
 	]);
 
 	exit;
 }
 
-if ($user["status"] !== 1 || $user["is_suspended"] === 1) {
+if ($user["status"] != 1 || $user["is_suspended"] == 1) {
     http_response_code(403);
 
     echo json_encode([

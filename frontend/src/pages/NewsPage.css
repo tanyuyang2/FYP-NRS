@@ -5,19 +5,15 @@
 
 .page {
 	display: grid;
-    grid-template-columns: 300px minmax(800px, 1fr)
-}
-
-.article-page {
-    isolation: isolate;
+    grid-template-columns: 300px minmax(0, 1fr)
 }
 
 .article-page .article-page-background {
     position: fixed;
-    top: 120px;
     left: 0;
+	top: 0;
     width: 100%;
-    height: calc(100dvh - 120px);
+	height: 100dvh;
     object-fit: cover;
     object-position: center;
     z-index: -1;
@@ -29,14 +25,9 @@
 }
 
 .article-page {
-    height: 100dvh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-}
-
-.article-page .header {
-    flex-shrink: 0;
 }
 
 .article-page .article-page-content {
@@ -50,11 +41,19 @@
     top: 0;
 }
 
-.article-page .header {
-    background: none;
+.site-layout:has(> .article-page) {
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	isolation: isolate;
 }
 
-.article-page .article-page-background {
-    top: 0;
-    height: 100dvh;
+.site-layout:has(> .article-page) > .header {
+	flex-shrink: 0;
+	background: none;
+}
+
+.site-layout > .article-page {
+	flex: 1;
+	min-height: 0;
 }

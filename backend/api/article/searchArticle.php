@@ -4,10 +4,21 @@ require __DIR__ . "/../../config/database.php";
 
 $page = $_GET["page"] ?? "1";
 $limit = 5;
-$search = trim($_GET["search"] ?? "");
+$search = $_GET["search"] ?? "";
 $tagId = $_GET["tag_id"] ?? null;
 
-if (!ctype_digit($page) ||  $page < 1) {
+if (!is_string($search)) {
+	http_response_code(400);
+	echo json_encode([
+		"success" => false,
+		"message" => "Invalid search"
+	]);
+	exit;
+}
+
+$search = trim($search);
+
+if (!ctype_digit($page) || (int) $page < 1) {
 	http_response_code(400);
 	echo json_encode([
 		"success" => false,
@@ -48,8 +59,9 @@ if ($tagId !== null) {
 		exit;
 	}
 
-	$tag = $stmt->get_result()->fetch_assoc();
+	$result = $stmt->get_result();
 	$stmt->close();
+	$tag = $result->fetch_assoc();
 
 	if (!$tag) {
 		http_response_code(404);
@@ -159,7 +171,6 @@ if ($tagId !== null) {
 		 LIMIT ? OFFSET ?"
 	);
 }
-
 
 if (!$stmt) {
 	http_response_code(500);

@@ -65,7 +65,7 @@ if (!$user) {
     exit;
 }
 
-if ($user["status"] !== 1 ||  $user["is_suspended"] === 1) {
+if ($user["status"] != 1 || $user["is_suspended"] == 1) {
     session_unset();
     session_destroy();
     http_response_code(403);

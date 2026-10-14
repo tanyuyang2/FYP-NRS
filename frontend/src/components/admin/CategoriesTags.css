@@ -1,0 +1,165 @@
+.categories-tags {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 32px;
+}
+
+.categories-tags h1 {
+	margin: 0 0 8px;
+}
+
+.categories-tags .categories-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+
+.categories-tags .categories-subtitle,
+.categories-tags .tags-subtitle {
+	margin: 0;
+	color: #777;
+}
+
+.categories-tags .categories-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.categories-tags .category-item {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	background: white;
+}
+
+.categories-tags .category-details {
+	flex: 1;
+	min-width: 0;
+}
+
+.categories-tags .category-name {
+	margin: 0 0 4px;
+	font-weight: 600;
+	overflow-wrap: anywhere;
+}
+
+.categories-tags .category-count {
+	margin: 0;
+	color: #777;
+	font-size: 14px;
+}
+
+.categories-tags .category-actions {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.categories-tags .categories-add,
+.categories-tags .tags-add {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.categories-tags .categories-add,
+.categories-tags .tags-add,
+.categories-tags .category-edit,
+.categories-tags .category-delete {
+	flex-shrink: 0;
+	padding: 10px 24px;
+	border: none;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.categories-tags .categories-add,
+.categories-tags .tags-add,
+.categories-tags .category-edit {
+	background: #7046c6;
+	color: white;
+}
+
+.categories-tags .categories-add:hover,
+.categories-tags .tags-add:hover,
+.categories-tags .category-edit:hover {
+	background: #5e3eb0;
+}
+
+.categories-tags .category-delete {
+	border: 1px solid #ddd;
+	background: white;
+	color: #222;
+}
+
+.categories-tags .category-delete:hover:not(:disabled) {
+	background: #f5f5f5;
+}
+
+.categories-tags .category-delete:disabled {
+	opacity: 0.5;
+}
+
+.categories-tags .tags-section {
+	margin-top: 40px;
+}
+
+.categories-tags .tags-section h2 {
+	margin: 0 0 8px;
+	font-size: 24px;
+}
+
+.categories-tags .tags-subtitle {
+	margin-bottom: 24px;
+}
+
+.categories-tags .tags-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.categories-tags .tag-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 16px;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	background: white;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.categories-tags .tag-delete {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	border: none;
+	background: none;
+	color: #777;
+}
+
+.categories-tags .tag-delete:hover:not(:disabled) {
+	color: #bf4040;
+}
+
+.categories-tags .tags-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 24px;
+}
+
+.categories-tags .tag-delete:disabled {
+	opacity: 0.5;
+}

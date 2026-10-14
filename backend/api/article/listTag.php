@@ -8,10 +8,16 @@ $stmt = $conn->prepare(
      ORDER BY name ASC"
 );
 
-if (!$stmt || !$stmt->execute()) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => "Server error"]);
-    exit;
+if (!$stmt) {
+	http_response_code(500);
+	echo json_encode(["success" => false, "message" => "Server error"]);
+	exit;
+}
+
+if (!$stmt->execute()) {
+	http_response_code(500);
+	echo json_encode(["success" => false, "message" => "Server error"]);
+	exit;
 }
 
 $result = $stmt->get_result();

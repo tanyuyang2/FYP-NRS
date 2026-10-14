@@ -1,0 +1,33 @@
+.admin-sidebar {
+	height: calc(100vh - 120px);
+	position: sticky;
+	top: 120px;
+	padding-top: 32px;
+	background: white;
+	overflow-y: auto;
+}
+
+.admin-sidebar .admin-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.admin-sidebar .admin-nav a {
+	padding: 12px 32px;
+	border-left: 4px solid transparent;
+	color: #222;
+	text-decoration: none;
+	font-size: 18px;
+}
+
+.admin-sidebar .admin-nav a:hover {
+	background: #faf7ff;
+	color: #7046c6;
+}
+
+.admin-sidebar .admin-nav a.active {
+	border-left-color: #7046c6;
+	color: #7046c6;
+	font-weight: 600;
+}

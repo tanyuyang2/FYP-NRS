@@ -1,0 +1,77 @@
+.resolved-reports {
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 32px;
+}
+
+.resolved-reports h1 {
+	margin: 0 0 8px;
+}
+
+.resolved-reports .resolved-subtitle {
+	margin: 0 0 24px;
+	color: #777;
+}
+
+.resolved-reports .resolved-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.resolved-reports .resolved-columns,
+.resolved-reports .resolved-row {
+	display: grid;
+	grid-template-columns: 140px 160px minmax(0, 1fr) 120px minmax(0, 1fr);
+	align-items: center;
+	gap: 24px;
+	padding: 10px;
+}
+
+.resolved-reports .resolved-columns {
+	padding: 0 10px;
+	font-weight: 600;
+}
+
+.resolved-reports .resolved-row {
+	border: 1px solid #ddd;
+	border-radius: 12px;
+}
+
+.resolved-reports .resolved-row:hover {
+	background: #faf7ff;
+}
+
+.resolved-reports .resolved-actor,
+.resolved-reports .resolved-target {
+	overflow-wrap: anywhere;
+}
+
+.resolved-reports .resolved-action {
+	padding: 10px 0;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.resolved-reports .resolved-action.dismissed {
+	background: #e0f2e6;
+	color: #2e8b57;
+}
+
+.resolved-reports .resolved-action.warning {
+	background: #fff0cc;
+	color: #a66b12;
+}
+
+.resolved-reports .resolved-action.suspension {
+	background: #f7df8b;
+	color: #8c6518;
+}
+
+.resolved-reports .resolved-action.ban {
+	background: #f8dddd;
+	color: #bd3e3e;
+}

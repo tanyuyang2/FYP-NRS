@@ -1,17 +1,7 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    http_response_code(401);
-    echo json_encode([
-        "success" => false,
-        "message" => "You must be logged in"
-    ]);
-    exit;
-}
+require __DIR__ . "/../utils/requireUser.php";
 
 $userId = $_SESSION["user_id"];
 $articleId = $_GET["id"] ?? null;
@@ -100,9 +90,7 @@ $stmt->close();
 $article = $result->fetch_assoc();
 
 $stmt = $conn->prepare(
-    "SELECT
-        t.tag_id,
-        t.name
+    "SELECT t.tag_id, t.name
      FROM article_tag at
      JOIN tag t ON at.tag_id = t.tag_id
      WHERE at.article_id = ?

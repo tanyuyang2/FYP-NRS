@@ -1,0 +1,79 @@
+.reported-content {
+	padding: 32px;
+}
+
+.reported-content h1 {
+	margin: 0 0 8px;
+}
+
+.reported-content .reported-subtitle {
+	margin: 0 0 24px;
+	color: #777;
+}
+
+.reported-content .reported-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.reported-content .reported-item {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	background: white;
+}
+
+.reported-content .reported-type {
+	flex-shrink: 0;
+	padding: 6px 0;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	width: 100px;
+	text-align: center;
+}
+
+.reported-content .reported-type.reported-article {
+	background: #f0ebfb;
+}
+
+.reported-content .reported-type.reported-comment {
+	background: #f4e3dc;
+}
+
+.reported-content .reported-details {
+	flex: 1;
+	min-width: 0;
+}
+
+.reported-content .reported-title {
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.reported-content .reported-count {
+	margin: 0;
+	color: #777;
+	flex-shrink: 0;
+}
+
+.reported-content .reported-review {
+	flex-shrink: 0;
+	padding: 10px 24px;
+	border: none;
+	border-radius: 20px;
+	background: #7046c6;
+	color: white;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.reported-content .reported-review:hover {
+	background: #5e3eb0;
+}

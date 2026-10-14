@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . "/../../config/cors.php";
 require __DIR__ . "/../../config/database.php";
-require_once __DIR__ . "/../utils/recordArticleView.php";
+require __DIR__ . "/../utils/recordArticleView.php";
 
 $articleId = $_GET["id"] ?? null;
 

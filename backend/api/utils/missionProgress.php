@@ -1,5 +1,4 @@
 <?php
-
 function getMissionDefinitions()
 {
     return [
@@ -170,12 +169,13 @@ function isMissionClaimed($conn, $userId, $referenceKey)
 
     $stmt->bind_param("is", $userId, $referenceKey);
 
-    if (!$stmt->execute()) {
-        return null;
+	if (!$stmt->execute()) {
+		return null;
     }
 
-    $claimed = $stmt->get_result()->num_rows > 0;
+    $result = $stmt->get_result();
     $stmt->close();
+    $claimed = $result->num_rows > 0;
 
     return $claimed;
 }

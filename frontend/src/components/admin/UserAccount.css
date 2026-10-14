@@ -1,0 +1,130 @@
+.user-accounts {
+	width: 100%;
+	padding: 32px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.user-accounts h1 {
+	margin: 0 0 8px;
+}
+
+.user-accounts .users-subtitle {
+	margin: 0 0 24px;
+	color: #777;
+}
+
+.user-accounts .users-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+
+.user-accounts .users-search {
+	display: flex;
+	flex: 1;
+	gap: 12px;
+}
+
+.user-accounts .users-search input {
+	flex: 1;
+	min-width: 0;
+	padding: 12px 16px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	font-size: 16px;
+}
+
+.user-accounts .users-filter {
+	padding: 12px 16px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	background: white;
+	font-size: 16px;
+}
+
+.user-accounts .users-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.user-accounts .users-item {
+	display: grid;
+	grid-template-columns:
+		minmax(220px, 1fr)
+		minmax(100px, 1fr)
+		minmax(120px, 1fr)
+		minmax(110px, 1fr);
+	align-items: center;
+	gap: 24px;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	background: white;
+}
+
+.user-accounts .users-details {
+	overflow-wrap: anywhere;
+}
+
+.user-accounts .users-name {
+	margin: 0 0 4px;
+	font-weight: 600;
+}
+
+.user-accounts .users-email {
+	margin: 0;
+	color: #777;
+	font-size: 14px;
+}
+
+.user-accounts .users-role {
+	text-align: center;
+}
+
+.user-accounts .users-status {
+	justify-self: center;
+	width: 120px;
+	padding: 10px 0;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.user-accounts .users-status.active {
+	background: #e0f2e6;
+	color: #2e8b57;
+}
+
+.user-accounts .users-status.suspended {
+	background: #f7df8b;
+	color: #8c6518;
+}
+
+.user-accounts .users-status.banned {
+	background: #f8dddd;
+	color: #bd3e3e;
+}
+
+.user-accounts .users-search button,
+.user-accounts .users-manage {
+	padding: 10px 24px;
+	border: none;
+	border-radius: 20px;
+	background: #7046c6;
+	color: white;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.user-accounts .users-manage {
+	justify-self: end;
+}
+
+.user-accounts .users-search button:hover,
+.user-accounts .users-manage:hover {
+	background: #5e3eb0;
+}

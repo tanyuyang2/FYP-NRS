@@ -10,7 +10,6 @@ export default function LoginModal({ onClose, onOpenRegister, onOpenForgotPasswo
 	});
 	const { login } = useAuth();
 
-
 	const handleChange = (e) => {
 		setFormData((prev) => ({
 			...prev,

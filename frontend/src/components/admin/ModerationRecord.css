@@ -1,0 +1,98 @@
+.moderation-record {
+	padding: 32px;
+}
+
+.moderation-record h1 {
+	margin: 0 0 8px;
+}
+
+.moderation-record .moderation-subtitle {
+	margin: 0 0 24px;
+	color: #777;
+}
+
+.moderation-record .moderation-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 20px;
+}
+
+.moderation-record .moderation-toolbar h2 {
+	margin: 0;
+	font-size: 20px;
+}
+
+.moderation-record .moderation-filter {
+	padding: 12px 16px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	background: white;
+	font-size: 16px;
+}
+
+.moderation-record .moderation-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.moderation-record .moderation-columns,
+.moderation-record .moderation-row {
+	display: grid;
+	grid-template-columns: 120px 80px minmax(100px, 0.5fr) 120px minmax(120px, 1fr) minmax(0, 2fr);
+	align-items: center;
+	gap: 24px;
+	padding: 10px;
+}
+
+.moderation-record .moderation-columns {
+	padding: 0 10px;
+	font-weight: 600;
+}
+
+.moderation-record .moderation-row {
+	border: 1px solid #ddd;
+	border-radius: 12px;
+}
+
+.moderation-record .moderation-actor,
+.moderation-record .moderation-target {
+	overflow-wrap: anywhere;
+}
+
+.moderation-record .moderation-action {
+	padding: 10px 0;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.moderation-record .moderation-action.warning {
+	background: #fff0cc;
+	color: #a66b12;
+}
+
+.moderation-record .moderation-action.suspension {
+	background: #f7df8b;
+	color: #8c6518;
+}
+
+.moderation-record .moderation-action.ban {
+	background: #f8dddd;
+	color: #bd3e3e;
+}
+
+.moderation-record .moderation-action.lift_suspension,
+.moderation-record .moderation-action.unban {
+	background: #edf7f0;
+	color: #286443;
+}
+
+.moderation-record .moderation-reason {
+	margin: 0;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}

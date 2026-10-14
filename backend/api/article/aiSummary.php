@@ -76,9 +76,14 @@ if (!$article) {
 }
 
 $stmt = $conn->prepare(
-    "SELECT comment_id, content, parent_comment_id
-     FROM comment
-     WHERE article_id = ? AND status = 1"
+	"SELECT
+		c.comment_id,
+		c.content,
+		c.parent_comment_id,
+		u.username AS author
+	 FROM comment c
+	 JOIN users u ON c.user_id = u.user_id
+	 WHERE c.article_id = ? AND c.status = 1"
 );
 
 if (!$stmt) {
@@ -118,23 +123,37 @@ if ($existing) {
 	}
 }
 
-$commentText = "";
+$repliesByParent = [];
 
 foreach ($comments as $comment) {
-    if ($comment["parent_comment_id"] === null) {
-
-        $commentText .= "\nComment:\n";
-        $commentText .= $comment["content"] . "\n";
-
-        foreach ($comments as $reply) {
-
-            if ($reply["parent_comment_id"] == $comment["comment_id"]) {
-                $commentText .= "Reply:\n";
-                $commentText .= $reply["content"] . "\n";
-            }
-        }
-    }
+	$key = $comment["parent_comment_id"] ?? "root";
+	$repliesByParent[$key][] = $comment;
 }
+
+function buildCommentText($repliesByParent, $parent = null)
+{
+	$key = $parent["comment_id"] ?? "root";
+	$text = "";
+
+	foreach ($repliesByParent[$key] ?? [] as $comment) {
+		if ($parent === null) {
+			$text .= "\nComment #" . $comment["comment_id"];
+			$text .= " by " . $comment["author"] . ":\n";
+		} else {
+			$text .= "\nReply #" . $comment["comment_id"];
+			$text .= " by " . $comment["author"];
+			$text .= " to comment #" . $parent["comment_id"];
+			$text .= " by " . $parent["author"] . ":\n";
+		}
+
+		$text .= $comment["content"] . "\n";
+		$text .= buildCommentText($repliesByParent, $comment);
+	}
+
+	return $text;
+}
+
+$commentText = buildCommentText($repliesByParent);
 
 $prompt = 
 	"You are an AI assistant for a gaming news website.
@@ -153,7 +172,10 @@ $prompt =
 	Write one short paragraph summarizing the main points of the article.
 
 	Comment Summary:
-	Write one short paragraph summarizing the main opinions and reactions in the comments.
+	Write one short paragraph summarizing the overall opinions and reactions.
+	Use the author names and reply relationships to understand the discussion,
+	but do not mention usernames in the summary.
+	Do not treat multiple comments from the same author as multiple people's opinions.
 
 	Formatting rules: - Use plain text headings exactly as written above. 
 	- Do not use Markdown. - Do not add #, ##, ###, **, or other Markdown formatting. 

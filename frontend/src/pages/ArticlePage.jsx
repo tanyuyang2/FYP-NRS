@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import LeftSidebar from "../components/LeftSideBar";
 import Article from "../components/Article";
@@ -9,7 +8,6 @@ export default function ArticlePage() {
 	const [backgroundUrl, setBackgroundUrl] = useState(null);
     return (
         <div className="article-page">
-            <Header />
 			{backgroundUrl && (
                 <img
                     className="article-page-background"
