@@ -11,8 +11,6 @@ require __DIR__ . "/../../config/database.php";
 const TRUST_MIN_ARTICLES = 3;
 const TRUST_PRIOR = 3;
 const TRUST_SCALE = 250;
-// [Control] posts: one universally helpful, one universally unhelpful.
-const TRUST_EXCLUDED_ARTICLES = "55, 56";
 
 $userId = $_GET["id"] ?? null;
 
@@ -46,13 +44,11 @@ $stmt = $conn->prepare(
         (SELECT COUNT(*)
          FROM article a
          WHERE a.author_id = u.user_id AND a.status = 1 AND a.published_at <= NOW()
-         AND a.bridging_score IS NOT NULL
-         AND a.article_id NOT IN (" . TRUST_EXCLUDED_ARTICLES . ")) AS rated_articles,
+         AND a.bridging_score IS NOT NULL) AS rated_articles,
         (SELECT COALESCE(SUM(a.bridging_score), 0)
          FROM article a
          WHERE a.author_id = u.user_id AND a.status = 1 AND a.published_at <= NOW()
-         AND a.bridging_score IS NOT NULL
-         AND a.article_id NOT IN (" . TRUST_EXCLUDED_ARTICLES . ")) AS bridging_sum
+         AND a.bridging_score IS NOT NULL) AS bridging_sum
      FROM users u
      WHERE u.user_id = ?"
 );

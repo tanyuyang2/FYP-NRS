@@ -37,11 +37,13 @@ python combined.py      # main model: user positions, similarities, article rank
 
 - Articles 55 and 56 are deliberate **control posts**, one universally
   helpful and one universally unhelpful. They're excluded from user
-  similarity but kept in the article ranking.
+  similarity but kept in the article ranking. They belong to their own
+  account, `controlpost` (user 29), so they need no special case in
+  production.
 - The axis has no inherent direction, so the user in `data.ANCHOR` (YY) is
   pinned to the negative end to keep runs comparable.
 - Authors' ratings of their own articles are dropped at export (and in
-  production), except on the control posts. They aren't independent
+  production). They aren't independent
   judgements, and from an author far out on the axis they read as
   cross-side agreement.
 - Comment reactions (`data/comment_ratings.tsv`) leave out commenters' reactions

@@ -203,12 +203,12 @@ require __DIR__ . "/../config/database.php";
 
 // An author's rating of their own article is not an independent judgement:
 // it is helpful whichever side they are on, and from an author far out on the
-// axis it reads as cross-side agreement. The control posts keep theirs.
+// axis it reads as cross-side agreement.
 $result = $conn->query(
 	"SELECT r.user_id, r.article_id, r.reaction
 	 FROM article_reaction r
 	 JOIN article a ON a.article_id = r.article_id
-	 WHERE r.user_id <> a.author_id OR r.article_id IN (55, 56)"
+	 WHERE r.user_id <> a.author_id"
 );
 if (!$result) {
 	fwrite(STDERR, "reading ratings failed: {$conn->error}\n");
